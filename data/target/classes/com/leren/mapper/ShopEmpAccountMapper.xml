@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leren.mapper.ShopEmpAccountMapper">
+    <resultMap id="BaseResultMap" type="com.leren.entity.auth.ShopEmpAccount">
+        <id column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="last_login_time" jdbcType="BIGINT" property="lastLoginTime"/>
+        <result column="locked" jdbcType="INTEGER" property="locked"/>
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="online" jdbcType="INTEGER" property="online"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="pwd_salt" jdbcType="VARCHAR" property="pwdSalt"/>
+        <result column="shop_emp_uuid" jdbcType="VARCHAR" property="shopEmpUuid"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    uuid, account, last_login_time, locked, login_ip, online, password, pwd_salt, shop_emp_uuid, 
+    status
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_emp_account
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from shop_emp_account
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.leren.entity.auth.ShopEmpAccount">
+    insert into shop_emp_account (uuid, account, last_login_time, 
+      locked, login_ip, online, 
+      password, pwd_salt, shop_emp_uuid, 
+      status)
+    values (#{uuid,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=BIGINT}, 
+      #{locked,jdbcType=INTEGER}, #{loginIp,jdbcType=VARCHAR}, #{online,jdbcType=INTEGER}, 
+      #{password,jdbcType=VARCHAR}, #{pwdSalt,jdbcType=VARCHAR}, #{shopEmpUuid,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.leren.entity.auth.ShopEmpAccount">
+        insert into shop_emp_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time,
+            </if>
+            <if test="locked != null">
+                locked,
+            </if>
+            <if test="loginIp != null">
+                login_ip,
+            </if>
+            <if test="online != null">
+                online,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="pwdSalt != null">
+                pwd_salt,
+            </if>
+            <if test="shopEmpUuid != null">
+                shop_emp_uuid,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=BIGINT},
+            </if>
+            <if test="locked != null">
+                #{locked,jdbcType=INTEGER},
+            </if>
+            <if test="loginIp != null">
+                #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="online != null">
+                #{online,jdbcType=INTEGER},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="pwdSalt != null">
+                #{pwdSalt,jdbcType=VARCHAR},
+            </if>
+            <if test="shopEmpUuid != null">
+                #{shopEmpUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.leren.entity.auth.ShopEmpAccount">
+        update shop_emp_account
+        <set>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime,jdbcType=BIGINT},
+            </if>
+            <if test="locked != null">
+                locked = #{locked,jdbcType=INTEGER},
+            </if>
+            <if test="loginIp != null">
+                login_ip = #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="online != null">
+                online = #{online,jdbcType=INTEGER},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="pwdSalt != null">
+                pwd_salt = #{pwdSalt,jdbcType=VARCHAR},
+            </if>
+            <if test="shopEmpUuid != null">
+                shop_emp_uuid = #{shopEmpUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.leren.entity.auth.ShopEmpAccount">
+    update shop_emp_account
+    set account = #{account,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=BIGINT},
+      locked = #{locked,jdbcType=INTEGER},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      online = #{online,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      pwd_salt = #{pwdSalt,jdbcType=VARCHAR},
+      shop_emp_uuid = #{shopEmpUuid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+
+    <!--根据账号查询客户账户信息-->
+    <select id="selectSingleByParam" parameterType="map" resultMap="BaseResultMap">
+        select
+          sea.uuid, sea.account, sea.last_login_time, sea.locked, sea.login_ip,
+          sea.online, sea.password, sea.pwd_salt, sea.shop_emp_uuid,sea.status
+        from
+        shop_emp_account sea
+        inner join shop_emp se
+        on sea.shop_emp_uuid = se.uuid
+        inner join emp
+        on emp.uuid = se.emp_uuid
+        where 1 = 1
+        <if test="account != null">
+            and sea.account = #{account}
+        </if>
+        <if test="mobile != null">
+            and emp.mobile = #{mobile}
+        </if>
+        <if test="status != null">
+            and sea.status = #{status}
+        </if>
+    </select>
+</mapper>

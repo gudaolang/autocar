@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - am_car_dev@localhost" uuid="3c33e6fa-c014-4ea3-9088-fa617487ebf0">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>am_car_dev.*</schema-pattern>
+      <default-schemas>am_car_dev.*</default-schemas>
+    </data-source>
+    <data-source name="MySQL - test_car@localhost" uuid="b44d92ea-a154-4549-8f58-ea2f0afca820">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>test_car.*</schema-pattern>
+      <default-schemas>test_car.*</default-schemas>
+    </data-source>
+  </component>
+</project>

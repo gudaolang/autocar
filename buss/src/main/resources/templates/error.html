@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>error</title>
+</head>
+<body>
+<h1>错误处理</h1>
+<div>请求路径:<p th:text="${url} == null? '无效路径':${url}"></p></div>
+<div>失败原因:<p style="color: red" th:text="${code} == 400?'无此请求':(${exception} == null?'错误模板':${exception.message})"></p>
+</div>
+</body>
+</html>

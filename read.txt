@@ -1,0 +1,31 @@
+网关Zuul:
+
+eureka [eureKaServer]
+    eurekaApplication
+    port 8761
+
+auth[eureKaClient]
+    authApplication
+    port 8084
+
+cms[eureKaClient]
+    CmsApplication
+    port 8081
+
+buss[eureKaClient]
+    buss
+    port 8082
+
+
+Hystrix
+    HystrixApplication
+    port 8085
+
+zuul[eureKaClient]
+    zuulApplication
+    port 8888
+
+
+trubine
+    turbineApplication
+    port 9000

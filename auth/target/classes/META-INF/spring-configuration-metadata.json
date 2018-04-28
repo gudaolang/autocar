@@ -1,0 +1,64 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "name": "application-cas.properties",
+      "type": "com.leren.shiro.CasConstantConfig"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "name": "application-cas.properties.assertion-filters",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "name": "application-cas.properties.auth-filters",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "name": "application-cas.properties.cas-server-login-url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "name": "application-cas.properties.cas-server-url-prefix",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "defaultValue": true,
+      "name": "application-cas.properties.redirect-after-validation",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "name": "application-cas.properties.request-wrapper-filters",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "name": "application-cas.properties.server-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "name": "application-cas.properties.sign-out-filters",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "defaultValue": true,
+      "name": "application-cas.properties.use-session",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.leren.shiro.CasConstantConfig",
+      "name": "application-cas.properties.validate-filters",
+      "type": "java.lang.String"
+    }
+  ]
+}
