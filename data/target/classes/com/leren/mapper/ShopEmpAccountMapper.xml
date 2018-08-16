@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.leren.mapper.ShopEmpAccountMapper">
     <resultMap id="BaseResultMap" type="com.leren.entity.auth.ShopEmpAccount">
-        <id column="uuid" jdbcType="VARCHAR" property="uuid"/>
-        <result column="account" jdbcType="VARCHAR" property="account"/>
-        <result column="last_login_time" jdbcType="BIGINT" property="lastLoginTime"/>
-        <result column="locked" jdbcType="INTEGER" property="locked"/>
-        <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
-        <result column="online" jdbcType="INTEGER" property="online"/>
-        <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="pwd_salt" jdbcType="VARCHAR" property="pwdSalt"/>
-        <result column="shop_emp_uuid" jdbcType="VARCHAR" property="shopEmpUuid"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
+        <id column="uuid" property="uuid" jdbcType="VARCHAR"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="last_login_time" property="lastLoginTime" jdbcType="BIGINT"/>
+        <result column="locked" property="locked" jdbcType="INTEGER"/>
+        <result column="login_ip" property="loginIp" jdbcType="VARCHAR"/>
+        <result column="online" property="online" jdbcType="INTEGER"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="pwd_salt" property="pwdSalt" jdbcType="VARCHAR"/>
+        <result column="shop_emp_uuid" property="shopEmpUuid" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
     uuid, account, last_login_time, locked, login_ip, online, password, pwd_salt, shop_emp_uuid, 
     status
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
         from shop_emp_account
@@ -137,8 +137,6 @@
         </set>
         where uuid = #{uuid,jdbcType=VARCHAR}
     </update>
-
-
     <update id="updateByPrimaryKey" parameterType="com.leren.entity.auth.ShopEmpAccount">
     update shop_emp_account
     set account = #{account,jdbcType=VARCHAR},
@@ -153,26 +151,10 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 
-    <!--根据账号查询客户账户信息-->
     <select id="selectSingleByParam" parameterType="map" resultMap="BaseResultMap">
         select
-          sea.uuid, sea.account, sea.last_login_time, sea.locked, sea.login_ip,
-          sea.online, sea.password, sea.pwd_salt, sea.shop_emp_uuid,sea.status
-        from
-        shop_emp_account sea
-        inner join shop_emp se
-        on sea.shop_emp_uuid = se.uuid
-        inner join emp
-        on emp.uuid = se.emp_uuid
-        where 1 = 1
-        <if test="account != null">
-            and sea.account = #{account}
-        </if>
-        <if test="mobile != null">
-            and emp.mobile = #{mobile}
-        </if>
-        <if test="status != null">
-            and sea.status = #{status}
-        </if>
+        <include refid="Base_Column_List"/>
+        from shop_emp_account sea
+        where sea.account = #{account}
     </select>
 </mapper>

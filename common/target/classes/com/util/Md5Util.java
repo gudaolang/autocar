@@ -72,10 +72,8 @@ public class Md5Util {
         try {
             KeySpec spec = new PBEKeySpec(pwd.toCharArray(), salt.getBytes(StandardCharsets.UTF_8), 4096, 256 * 8);
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-            return factory.generateSecret(spec).getEncoded().toString();
-        } catch (NoSuchAlgorithmException e) {
-            logger.error(e.getMessage());
-        } catch (InvalidKeySpecException e) {
+            return new String(factory.generateSecret(spec).getEncoded());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             logger.error(e.getMessage());
         }
         return null;

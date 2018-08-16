@@ -139,6 +139,15 @@ public class GuavaTest {
                 .put(1, "Foo").putAll(2, "Foo", "Bar", "Baz").build();
         System.out.println(build.get(1));
         System.out.println(build.get(2));
+
+        String usableItems = "1,2,3,4,5";
+        String usableParts = "1,7,8,9";
+        List<String> ui = Splitter.on(',').splitToList(usableItems);
+        List<String> up = Splitter.on(',').splitToList(usableParts);
+        System.out.println(Collections.disjoint(ui,up));
+
+
+        System.out.println(Splitter.on(',').splitToList(""));
     }
 }
 

@@ -3,7 +3,6 @@
 <mapper namespace="com.leren.mapper.ShopMapper">
     <resultMap id="BaseResultMap" type="com.leren.entity.auth.Shop">
         <id column="uuid" property="uuid" jdbcType="VARCHAR"/>
-        <result column="enterprise_uuid" property="enterpriseUuid" jdbcType="VARCHAR"/>
         <result column="account_nums" property="accountNums" jdbcType="INTEGER"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="buss_scope" property="bussScope" jdbcType="VARCHAR"/>
@@ -20,11 +19,13 @@
         <result column="shop_no" property="shopNo" jdbcType="VARCHAR"/>
         <result column="shop_type" property="shopType" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="enterprise_uuid" property="enterpriseUuid" jdbcType="VARCHAR"/>
+        <result column="bl_master" property="blMaster" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-    uuid, enterprise_uuid,account_nums, address, buss_scope, city_code, latitude, longitude, operation_state,
+    uuid, account_nums, address, buss_scope, city_code, latitude, longitude, operation_state, 
     province_code, region_code, shop_charger_emp_uuid, shop_charger_mobile, shop_charger_name, 
-    shop_name, shop_no, shop_type, status
+    shop_name, shop_no, shop_type, status, enterprise_uuid, bl_master
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
@@ -37,30 +38,32 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.leren.entity.auth.Shop">
-    insert into shop (uuid, enterprise_uuid,account_nums, address,
+    insert into shop (uuid, account_nums, address, 
       buss_scope, city_code, latitude, 
       longitude, operation_state, province_code, 
       region_code, shop_charger_emp_uuid, shop_charger_mobile, 
       shop_charger_name, shop_name, shop_no, 
-      shop_type, status)
-    values (#{uuid,jdbcType=VARCHAR},#{enterpriseUuid,jdbcType=VARCHAR}, #{accountNums,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR},
+      shop_type, status, enterprise_uuid, 
+      bl_master)
+    values (#{uuid,jdbcType=VARCHAR}, #{accountNums,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
       #{bussScope,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{latitude,jdbcType=DOUBLE}, 
       #{longitude,jdbcType=DOUBLE}, #{operationState,jdbcType=INTEGER}, #{provinceCode,jdbcType=VARCHAR}, 
       #{regionCode,jdbcType=VARCHAR}, #{shopChargerEmpUuid,jdbcType=VARCHAR}, #{shopChargerMobile,jdbcType=VARCHAR}, 
       #{shopChargerName,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, #{shopNo,jdbcType=VARCHAR}, 
-      #{shopType,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+      #{shopType,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{enterpriseUuid,jdbcType=VARCHAR}, 
+      #{blMaster,jdbcType=INTEGER})
   </insert>
-    <insert id="insertBatch" parameterType="list">
+
+    <insert id="insertBatch" parameterType="java.util.List">
         insert into shop (uuid, account_nums, address,
         buss_scope, city_code, latitude,
         longitude, operation_state, province_code,
         region_code, shop_charger_emp_uuid, shop_charger_mobile,
         shop_charger_name, shop_name, shop_no,
-        shop_type, status)
+        shop_type, status, enterprise_uuid,bl_master)
         values
-        <foreach collection="list" separator="," item="item">
-            (#{item.uuid,jdbcType=VARCHAR},#{item.enterpriseUuid,jdbcType=VARCHAR},
-            #{item.accountNums,jdbcType=INTEGER}, #{item.address,jdbcType=VARCHAR},
+        <foreach collection="list" item="item" separator=",">
+            (#{item.uuid,jdbcType=VARCHAR}, #{item.accountNums,jdbcType=INTEGER}, #{item.address,jdbcType=VARCHAR},
             #{item.bussScope,jdbcType=VARCHAR}, #{item.cityCode,jdbcType=VARCHAR}, #{item.latitude,jdbcType=DOUBLE},
             #{item.longitude,jdbcType=DOUBLE}, #{item.operationState,jdbcType=INTEGER},
             #{item.provinceCode,jdbcType=VARCHAR},
@@ -68,7 +71,8 @@
             #{item.shopChargerMobile,jdbcType=VARCHAR},
             #{item.shopChargerName,jdbcType=VARCHAR}, #{item.shopName,jdbcType=VARCHAR},
             #{item.shopNo,jdbcType=VARCHAR},
-            #{item.shopType,jdbcType=VARCHAR}, #{item.status,jdbcType=INTEGER})
+            #{item.shopType,jdbcType=VARCHAR}, #{item.status,jdbcType=INTEGER}, #{item.enterpriseUuid,jdbcType=VARCHAR},
+            #{item.blMaster,jdbcType=INTEGER})
         </foreach>
     </insert>
     <insert id="insertSelective" parameterType="com.leren.entity.auth.Shop">
@@ -76,9 +80,6 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,
-            </if>
-            <if test="enterpriseUuid != null">
-                enterprise_uuid,
             </if>
             <if test="accountNums != null">
                 account_nums,
@@ -128,16 +129,19 @@
             <if test="status != null">
                 status,
             </if>
+            <if test="enterpriseUuid != null">
+                enterprise_uuid,
+            </if>
+            <if test="blMaster != null">
+                bl_master,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 #{uuid,jdbcType=VARCHAR},
             </if>
-            <if test="enterpriseUuid != null">
-                #{enterpriseUuid,jdbcType=VARCHAR},
-            </if>
             <if test="accountNums != null">
-                #{accountNums,jdbcType=VARCHAR},
+                #{accountNums,jdbcType=INTEGER},
             </if>
             <if test="address != null">
                 #{address,jdbcType=VARCHAR},
@@ -184,14 +188,17 @@
             <if test="status != null">
                 #{status,jdbcType=INTEGER},
             </if>
+            <if test="enterpriseUuid != null">
+                #{enterpriseUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="blMaster != null">
+                #{blMaster,jdbcType=INTEGER},
+            </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.leren.entity.auth.Shop">
         update shop
         <set>
-            <if test="enterpriseUuid != null">
-                enterprise_uuid = #{enterpriseUuid,jdbcType=VARCHAR},
-            </if>
             <if test="accountNums != null">
                 account_nums = #{accountNums,jdbcType=INTEGER},
             </if>
@@ -240,14 +247,18 @@
             <if test="status != null">
                 status = #{status,jdbcType=INTEGER},
             </if>
+            <if test="enterpriseUuid != null">
+                enterprise_uuid = #{enterpriseUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="blMaster != null">
+                bl_master = #{blMaster,jdbcType=INTEGER},
+            </if>
         </set>
         where uuid = #{uuid,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.leren.entity.auth.Shop">
     update shop
-    set
-      enterprise_uuid = #{enterpriseUuid,jdbcType=VARCHAR},
-      account_nums = #{accountNums,jdbcType=INTEGER},
+    set account_nums = #{accountNums,jdbcType=INTEGER},
       address = #{address,jdbcType=VARCHAR},
       buss_scope = #{bussScope,jdbcType=VARCHAR},
       city_code = #{cityCode,jdbcType=VARCHAR},
@@ -262,7 +273,9 @@
       shop_name = #{shopName,jdbcType=VARCHAR},
       shop_no = #{shopNo,jdbcType=VARCHAR},
       shop_type = #{shopType,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      enterprise_uuid = #{enterpriseUuid,jdbcType=VARCHAR},
+      bl_master = #{blMaster,jdbcType=INTEGER}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

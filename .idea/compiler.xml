@@ -108,6 +108,7 @@
     <bytecodeTargetLevel target="1.8">
       <module name="api" target="1.8" />
       <module name="auth" target="1.8" />
+      <module name="auto" target="1.8" />
       <module name="base" target="1.8" />
       <module name="buss" target="1.8" />
       <module name="cms" target="1.8" />

@@ -23,11 +23,14 @@ import java.util.Map.Entry;
  * @author Administrator
  */
 public class MapUtils {
+
     private static final Logger logger = LoggerFactory.getLogger(MapUtils.class);
+
 
     public static HashMap<String, Object> getHashMap() {
         return new HashMap<>(1 << 4);
     }
+
 
     public static void addToMap(Map<String, Object> map, String key, Object o) {
         if (o != null) {
@@ -200,7 +203,7 @@ public class MapUtils {
     }
 
     /**
-     * @tips 将ListMap转化为实体List(复杂类型)
+     *  将ListMap转化为实体List(复杂类型)
      */
     public static <T> List<T> map2Array(List<Map<String, Object>> results, Class<T> clazz) {
         if (results != null && results.size() > 0) {
@@ -213,10 +216,10 @@ public class MapUtils {
     /**
      * 将map转成字符串
      *
-     * @param map
+     * @param map         参数
      * @param splitSymbol 连接符
-     * @return
-     * @throws UnsupportedEncodingException
+     * @return string 返回序列化后的字符串
+     * @throws UnsupportedEncodingException 编码异常
      */
     public static String serializeWithSplit(Map<String, Object> map, String splitSymbol)
             throws UnsupportedEncodingException {
@@ -225,9 +228,9 @@ public class MapUtils {
     }
 
     /**
-     * @param map
-     * @param splitSymbol
-     * @return
+     * @param map         参数
+     * @param splitSymbol 分割标识
+     * @return String 返回序列化后的字符串
      * @throws UnsupportedEncodingException
      */
     public static String serializeWithSplit(Map<String, Object> map, String splitSymbol, boolean isNeedEncode)

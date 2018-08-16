@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-    <!--<properties resource="jdbc.properties"></properties>-->
+    <properties resource="jdbc.properties"/>
     <classPathEntry
-            location="/Users/lee/work/project/autocar/data/src/main/java"/>
+            location="${class_entry}"/>
     <context id="tab"
              targetRuntime="MyBatis3">
         <commentGenerator>
@@ -14,30 +14,22 @@
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/test_car?autoReconnect=true&amp;allowMultiQueries=true"
-                        userId="root"
-                        password="lee0806"/>
+        <jdbcConnection connectionURL="${connection_url}" driverClass="${driver_class}" userId="${user}"
+                        password="${pwd}"/>
         <javaModelGenerator
-                targetPackage="com.leren.entity.mybatis"
-                targetProject="src/main/java"/>
+                targetPackage="${module_package}"
+                targetProject="${project}"/>
         <sqlMapGenerator
-                targetPackage="com.leren.mapper"
-                targetProject="src/main/java"/>
+                targetPackage="${mapper_package}"
+                targetProject="${project}"/>
         <javaClientGenerator
-                targetPackage="com.leren.mapper"
-                targetProject="src/main/java"
+                targetPackage="${mapper_package}"
+                targetProject="${project}"
                 type="XMLMAPPER"/>
-        <table
-                schema="shop"
-                tableName="shop"
-                domainObjectName="Shop"
-                enableSelectByPrimaryKey="true"
-                enableSelectByExample="false"
-                enableDeleteByExample="false"
-                enableCountByExample="false"
-                enableUpdateByExample="false"
-        >
+        <table tableName="${table_name}" domainObjectName="${entity_name}"
+               enableSelectByPrimaryKey="true" enableSelectByExample="false"
+               enableDeleteByExample="false" enableCountByExample="false"
+               enableUpdateByExample="false">
             <!--true 生成的实体列名会跟数据库的一致;false 会生成驼峰结构(默认值)-->
             <property name="useActualColumnNames" value="false"/>
             <!--主键生成策略 自增(使用uuid作为主键时,请注意生成策略)-->
