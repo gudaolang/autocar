@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author lee
- * @Date:28/02/2018
+ * @author lee 28/02/2018
  */
 
 public class BaseController {
@@ -16,7 +15,7 @@ public class BaseController {
     public static String get403Error(BindingResult result) {
         if (result.hasErrors()) {
             List<ObjectError> errors = result.getAllErrors();
-            return errors.stream().map(err -> err.getDefaultMessage()).collect(Collectors.joining(","));
+            return errors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining(","));
         }
         return null;
     }

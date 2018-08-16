@@ -35,7 +35,11 @@ public class RegisterController extends BaseController {
     @ApiOperation(value = "企业(连锁门店)注册")
     @PostMapping("enterprise")
     public void enterpriseRegister(@RequestBody EpRegisterParam registerParam) {
-        registerService.registerEnterprise(registerParam);
+        try {
+            registerService.registerEnterprise(registerParam);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

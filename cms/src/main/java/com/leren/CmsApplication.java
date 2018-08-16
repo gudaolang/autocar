@@ -1,22 +1,24 @@
 package com.leren;
 
+import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
+import com.alicp.jetcache.anno.config.EnableMethodCache;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author lee
- * @Date:12/03/2018
  */
 
 @SpringBootApplication
-@EnableEurekaClient
-@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @EnableCircuitBreaker
+@EnableEurekaClient
+@ComponentScan({"com.leren", "com.util"})
+@EnableMethodCache(basePackages = "com.leren")
+@EnableCreateCacheAnnotation
+//@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 public class CmsApplication {
     public static void main(String[] args) {
         SpringApplication.run(CmsApplication.class, args);

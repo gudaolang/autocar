@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author lee
- * @Date:01/03/2018
+ * @Date:27/02/2018
  */
 public class LoginShiroRealm extends AuthorizingRealm {
 
@@ -28,14 +28,15 @@ public class LoginShiroRealm extends AuthorizingRealm {
     @Resource
     private ShopEmpAccountServiceImpl shopEmpAccountService;
 
-
     @Resource
     private RedisUtil redisUtil;
 
-    //获取授权信息
-    //1,获取用户角色 获取角色权限
-    //2,获取用户自身权限
-
+    /**
+     * 获取登录人员权限(角色/权限信息)
+     *
+     * @param principals 参数主体
+     * @return 主体权限信息
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
@@ -60,13 +61,22 @@ public class LoginShiroRealm extends AuthorizingRealm {
 
         //保存权限信息以及角色信息
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+
         simpleAuthorizationInfo.setStringPermissions(permissions);
+
         simpleAuthorizationInfo.setRoles(roles);
 
         return simpleAuthorizationInfo;
     }
 
-    //获取身份验证信息
+
+    /**
+     * 认证客户信息
+     *
+     * @param token 身份验证信息
+     * @return 认证信息
+     * @throws AuthenticationException 认证异常
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
@@ -85,7 +95,8 @@ public class LoginShiroRealm extends AuthorizingRealm {
             throw new LockedAccountException();
         }
 
-        return new SimpleAuthenticationInfo(username, empAccount.getPassword(), ByteSource.Util.bytes(empAccount.getPwdSalt()), LoginShiroRealm.class.getSimpleName());
+        return new SimpleAuthenticationInfo(username, empAccount.getPassword(),
+                ByteSource.Util.bytes(empAccount.getPwdSalt()), LoginShiroRealm.class.getSimpleName());
     }
 
 }

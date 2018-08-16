@@ -37,6 +37,7 @@ public class AuthServiceImpl implements AuthService {
         String token = (String) redisUtil.getCacheObject("username_" + loginParam.getUsername() + "_token");
 
         if (StringUtils.isBlank(token)) {
+
             // 使用shiro认证
             String username = loginParam.getUsername();
             String password = loginParam.getPassword();
@@ -47,17 +48,24 @@ public class AuthServiceImpl implements AuthService {
                 Subject subject = SecurityUtils.getSubject();
                 subject.login(usernamePasswordToken);
             } catch (UnknownAccountException e) {
+                LOGGER.info("异常账号" + username + "登录:账号不存在!");
                 return new DataResult(500, "帐号不存在!");
             } catch (IncorrectCredentialsException e) {
+                LOGGER.info("账号" + username + "登录失败:密码错误!");
                 return new DataResult(500, "密码错误!");
             } catch (LockedAccountException e) {
+                LOGGER.info("账号" + username + "账号被锁定!");
                 return new DataResult(500, "帐号已锁定!");
             } catch (ExcessiveAttemptsException e) {
+                LOGGER.info("账号" + username + "账号被锁定:登录失败次数过多!");
                 return new DataResult(500, "登录失败次数过多,账号锁定10分钟!");
             }
+            //返回客户所拥有的权限信息
+
             // 全局会话的code
-            redisUtil.setCacheObject(CacheConstants.globalToken(username), UUID.randomUUID().toString(), 1, TimeUnit.DAYS);
+            redisUtil.setCacheObject(CacheConstants.globalToken(username), UUID.randomUUID().toString(), 3, TimeUnit.HOURS);
         }
+
         String backUrl = loginParam.getBackUrl();
         if (loginParam.getReqToken() != null && !loginParam.getReqToken().equals(token)) {
             backUrl = "login.html";
@@ -66,6 +74,8 @@ public class AuthServiceImpl implements AuthService {
         if (StringUtils.isBlank(backUrl)) {
             backUrl = null == GlobalComponentConfig.APP ? "/" : GlobalComponentConfig.APP;
         }
-        return new DataResult(backUrl);
+        return new DataResult(200, backUrl);
     }
+
+
 }

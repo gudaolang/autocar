@@ -42,7 +42,7 @@ public class SSOController extends BaseController {
     @ApiOperation(value = "登录")
     @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
-    public DataResult login(@Valid @RequestBody LoginParam loginParam, BindingResult result, HttpServletRequest request) {
+    public DataResult login(@Valid @RequestBody LoginParam loginParam, BindingResult result) {
 
         Assert.isTrue(!result.hasErrors(), get403Error(result));
 
@@ -55,9 +55,7 @@ public class SSOController extends BaseController {
     @ResponseBody
     public DataResult checkCode(HttpServletRequest request, @Valid @RequestBody LoginParam loginParam, BindingResult result) {
         Assert.isTrue(!result.hasErrors(), get403Error(result));
-
         String reqToken = request.getParameter("reqToken");
-
         String token = (String) redisUtil.getCacheObject(CacheConstants.globalToken(loginParam.getUsername()));
         if (StringUtils.isBlank(reqToken) || !reqToken.equals(token)) {
             return new DataResult(400, "无效code");

@@ -1,84 +1,43 @@
 package com.leren.entity.auth;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-/**
- * @author lee
- * @Date:28/02/2018
- */
-//企业基本信息
-@Entity
 public class Enterprise {
-    @Id
     private String uuid;
 
-    //企业名称
-    @Column(nullable = false)
-    private String enterpriseName;
-
-    //企业类型
-    @Column(nullable = false)
-    private Integer enterpriseType;
-
-    //企业资质编码
-    @Column
-    private String qualificationCode;
-
-    //企业资质图片
-    @Column
-    private String qualificationPic;
-
-    //省份编码
-    @Column
-    private String provinceCode;
-
-    //城市编码
-    @Column
-    private String cityCode;
-
-    //区域编码
-    @Column
-    private String regionCode;
-
-    //经度
-    @Column
-    private Double longitude;
-    //维度
-    @Column
-    private Double latitude;
-
-    //企业地址
-    @Column
     private String address;
 
-    //企业法人
-    @Column
-    private String legalPerson;
+    private Long auditMills;
 
-    //企业联系电话
-    @Column
+    private String cityCode;
+
     private String contactPhone;
 
-    //企业主页
-    @Column
+    private String enterpriseName;
+
+    private Integer enterpriseType;
+
+    private Long expireMills;
+
     private String homePage;
 
+    private Double latitude;
 
-    @Column(columnDefinition = "bigint(20) comment '注册时间'")
-    private Long registerDate;
+    private String legalPerson;
 
-    @Column(columnDefinition = "bigint(20) comment '审核成功时间'")
-    private Long auditDate;
+    private Double longitude;
 
-    @Column(columnDefinition = "bigint(20) comment '过期时间'")
-    private Long expireDate;
+    private String provinceCode;
 
-    //未审核:0 正常:1 禁用:2
-    @Column(nullable = false, columnDefinition = "Integer default 0")
+    private String qualificationCode;
+
+    private String qualificationPic;
+
+    private String regionCode;
+
+    private Long registerMills;
+
     private Integer status;
 
+    private String memo;
 
     public String getUuid() {
         return uuid;
@@ -86,6 +45,38 @@ public class Enterprise {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Long getAuditMills() {
+        return auditMills;
+    }
+
+    public void setAuditMills(Long auditMills) {
+        this.auditMills = auditMills;
+    }
+
+    public String getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
     public String getEnterpriseName() {
@@ -104,12 +95,20 @@ public class Enterprise {
         this.enterpriseType = enterpriseType;
     }
 
-    public Double getLongitude() {
-        return longitude;
+    public Long getExpireMills() {
+        return expireMills;
     }
 
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setExpireMills(Long expireMills) {
+        this.expireMills = expireMills;
+    }
+
+    public String getHomePage() {
+        return homePage;
+    }
+
+    public void setHomePage(String homePage) {
+        this.homePage = homePage;
     }
 
     public Double getLatitude() {
@@ -118,6 +117,30 @@ public class Enterprise {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getLegalPerson() {
+        return legalPerson;
+    }
+
+    public void setLegalPerson(String legalPerson) {
+        this.legalPerson = legalPerson;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getProvinceCode() {
+        return provinceCode;
+    }
+
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode;
     }
 
     public String getQualificationCode() {
@@ -136,22 +159,6 @@ public class Enterprise {
         this.qualificationPic = qualificationPic;
     }
 
-    public String getProvinceCode() {
-        return provinceCode;
-    }
-
-    public void setProvinceCode(String provinceCode) {
-        this.provinceCode = provinceCode;
-    }
-
-    public String getCityCode() {
-        return cityCode;
-    }
-
-    public void setCityCode(String cityCode) {
-        this.cityCode = cityCode;
-    }
-
     public String getRegionCode() {
         return regionCode;
     }
@@ -160,36 +167,12 @@ public class Enterprise {
         this.regionCode = regionCode;
     }
 
-    public String getAddress() {
-        return address;
+    public Long getRegisterMills() {
+        return registerMills;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getLegalPerson() {
-        return legalPerson;
-    }
-
-    public void setLegalPerson(String legalPerson) {
-        this.legalPerson = legalPerson;
-    }
-
-    public String getContactPhone() {
-        return contactPhone;
-    }
-
-    public void setContactPhone(String contactPhone) {
-        this.contactPhone = contactPhone;
-    }
-
-    public String getHomePage() {
-        return homePage;
-    }
-
-    public void setHomePage(String homePage) {
-        this.homePage = homePage;
+    public void setRegisterMills(Long registerMills) {
+        this.registerMills = registerMills;
     }
 
     public Integer getStatus() {
@@ -200,27 +183,11 @@ public class Enterprise {
         this.status = status;
     }
 
-    public Long getRegisterDate() {
-        return registerDate;
+    public String getMemo() {
+        return memo;
     }
 
-    public void setRegisterDate(Long registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public Long getAuditDate() {
-        return auditDate;
-    }
-
-    public void setAuditDate(Long auditDate) {
-        this.auditDate = auditDate;
-    }
-
-    public Long getExpireDate() {
-        return expireDate;
-    }
-
-    public void setExpireDate(Long expireDate) {
-        this.expireDate = expireDate;
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

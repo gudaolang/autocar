@@ -30,11 +30,9 @@ public class ShopServiceImpl implements ShopService {
         Assert.notEmpty(registerShops, "门店信息不能为空");
         List<Shop> shops = registerShops.stream().map(item -> {
             Shop shop = new Shop();
-
             BeanUtils.copyProperties(item, shop);
             shop.setUuid(UUIDUtil.getUuid());
             shop.setEnterpriseUuid(enterpriseUuid);
-
             return shop;
         }).collect(Collectors.toList());
 
@@ -43,11 +41,10 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void save(ShopRegisterParam registerParam) {
-        Shop shop = new Shop();
 
+        Shop shop = new Shop();
         BeanUtils.copyProperties(registerParam, shop);
         shop.setUuid(UUIDUtil.getUuid());
-
         shopMapper.insert(shop);
     }
 }

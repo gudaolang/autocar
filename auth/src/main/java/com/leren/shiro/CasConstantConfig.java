@@ -23,6 +23,7 @@ public class CasConstantConfig {
     private String serverName;
     
     private boolean useSession = true;
+
     private boolean redirectAfterValidation = true;
 
     public String getValidateFilters() {

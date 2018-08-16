@@ -31,11 +31,13 @@ public class RegisterServiceImpl implements RegisterService {
         Enterprise enterprise = new Enterprise();
 
         BeanUtils.copyProperties(registerParam, enterprise);
+
         enterprise.setUuid(UUIDUtil.getUuid());
         enterpriseService.save(enterprise);
 
         shopService.saveBatch(enterprise.getUuid(), registerParam.getShops());
     }
+
 
     @Override
     public void registerShop(ShopRegisterParam registerParam) {

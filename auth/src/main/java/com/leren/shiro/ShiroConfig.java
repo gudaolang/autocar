@@ -55,30 +55,30 @@ public class ShiroConfig {
     }
 
     @Bean
-    public RetryLimitMather retryLimitMather() {
-        return new RetryLimitMather();
+    public RetryLimitMatcher retryLimitMather() {
+        return new RetryLimitMatcher();
     }
 
 
+    /**
+     * 设置加密方式
+     * @param matcher
+     * @return
+     */
     @Bean
-    public LoginShiroRealm loginShiroRealm(RetryLimitMather mather) {
-
-        mather.setHashAlgorithmName("md5");
-        mather.setHashIterations(2);
-        mather.setStoredCredentialsHexEncoded(true);
-
+    public LoginShiroRealm loginShiroRealm(RetryLimitMatcher matcher) {
+        matcher.setHashAlgorithmName("md5");
+        matcher.setHashIterations(2);
+        matcher.setStoredCredentialsHexEncoded(true);
         LoginShiroRealm realm = new LoginShiroRealm();
-        realm.setCredentialsMatcher(mather);
+        realm.setCredentialsMatcher(matcher);
         return realm;
     }
 
     @Bean
     public SecurityManager securityManager(@Qualifier("loginShiroRealm") LoginShiroRealm shiroRealm) {
-
         DefaultSecurityManager securityManager = new DefaultWebSecurityManager();
-
         securityManager.setRealm(shiroRealm);
-
         return securityManager;
     }
 

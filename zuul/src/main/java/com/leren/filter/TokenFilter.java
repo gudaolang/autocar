@@ -43,7 +43,7 @@ public class TokenFilter extends ZuulFilter {
 //        String token = request.getParameter("token");
 //        if (StringUtils.isNotBlank(token)) {
 ////            authService.checkCode(token);
-//            return null;
+//            return null;¬
 //        } else {
 //            HttpServletResponse response = context.getResponse();
 //            response.setHeader("content-type", "application/json;charset=UTF-8");

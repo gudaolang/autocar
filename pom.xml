@@ -19,7 +19,6 @@
         <module>cms</module>
         <module>hystrix</module>
         <module>turbine</module>
-        <module>kafka</module>
     </modules>
 
     <name>leren</name>
@@ -126,6 +125,14 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>${springboot.version}</version>
         </dependency>
+
+        <!--重试机制-->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+            <version>1.2.2.RELEASE</version>
+        </dependency>
+
 
         <!--swagger-->
         <dependency>

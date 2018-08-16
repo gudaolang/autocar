@@ -25,7 +25,7 @@ public class DataResult<T> {
         this.code = code;
     }
 
-    public DataResult(int code, T data, String msg) {
+    public  DataResult(int code, T data, String msg) {
         this.msg = msg;
         this.code = code;
         this.data = data;

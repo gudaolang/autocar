@@ -28,7 +28,6 @@ public class UploadRest {
 
         logger.info("[upload File]:文件名称:" + photo.getOriginalFilename() + ",文件大小:" + photo.getSize());
 
-
         return "file-" + System.currentTimeMillis() + ".jpg";
     }
 

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leren.mapper.ShopEmpMapper" >
+  <resultMap id="BaseResultMap" type="com.leren.entity.auth.ShopEmp" >
+    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="emp_code" property="empCode" jdbcType="VARCHAR" />
+    <result column="emp_uuid" property="empUuid" jdbcType="VARCHAR" />
+    <result column="enterprise_id" property="enterpriseId" jdbcType="VARCHAR" />
+    <result column="hire_date" property="hireDate" jdbcType="BIGINT" />
+    <result column="leave_date" property="leaveDate" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uuid, avatar, emp_code, emp_uuid, enterprise_id, hire_date, leave_date, shop_id, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop_emp
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shop_emp
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.leren.entity.auth.ShopEmp" >
+    insert into shop_emp (uuid, avatar, emp_code, 
+      emp_uuid, enterprise_id, hire_date, 
+      leave_date, shop_id, status
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{empCode,jdbcType=VARCHAR}, 
+      #{empUuid,jdbcType=VARCHAR}, #{enterpriseId,jdbcType=VARCHAR}, #{hireDate,jdbcType=BIGINT}, 
+      #{leaveDate,jdbcType=BIGINT}, #{shopId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.leren.entity.auth.ShopEmp" >
+    insert into shop_emp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="empCode != null" >
+        emp_code,
+      </if>
+      <if test="empUuid != null" >
+        emp_uuid,
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+      <if test="hireDate != null" >
+        hire_date,
+      </if>
+      <if test="leaveDate != null" >
+        leave_date,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="empCode != null" >
+        #{empCode,jdbcType=VARCHAR},
+      </if>
+      <if test="empUuid != null" >
+        #{empUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="hireDate != null" >
+        #{hireDate,jdbcType=BIGINT},
+      </if>
+      <if test="leaveDate != null" >
+        #{leaveDate,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leren.entity.auth.ShopEmp" >
+    update shop_emp
+    <set >
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="empCode != null" >
+        emp_code = #{empCode,jdbcType=VARCHAR},
+      </if>
+      <if test="empUuid != null" >
+        emp_uuid = #{empUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="hireDate != null" >
+        hire_date = #{hireDate,jdbcType=BIGINT},
+      </if>
+      <if test="leaveDate != null" >
+        leave_date = #{leaveDate,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leren.entity.auth.ShopEmp" >
+    update shop_emp
+    set avatar = #{avatar,jdbcType=VARCHAR},
+      emp_code = #{empCode,jdbcType=VARCHAR},
+      emp_uuid = #{empUuid,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      hire_date = #{hireDate,jdbcType=BIGINT},
+      leave_date = #{leaveDate,jdbcType=BIGINT},
+      shop_id = #{shopId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>
